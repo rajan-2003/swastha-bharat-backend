@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Dr. John Doe",
+    "email": "john.doe@example.com",
+    "password": "hashedpassword123",
+    "specialty": "Cardiology",
+    "image": "http://example.com/images/john_doe.jpg",
+    "description": "Experienced cardiologist with 10 years in the field.",
+    "workExperience": 10,
+    "Lat": 40.7128,
+    "Long": -74.006,
+    "location": {
+      "type": "Point",
+      "coordinates": [-74.006, 40.7128]
+    },
+    "clinicName": "HealthCare Clinic NYC",
+    "numberOfPatientsViewed": 500,
+    "experience": 10,
+    "rating": 4.5,
+    "reviewCount": 120,
+    "availableDateTimeSlots": ["2024-08-08T10:00:00", "2024-08-08T14:00:00"]
+  },
+  {
+    "name": "Dr. Jane Smith",
+    "email": "jane.smith@example.com",
+    "password": "hashedpassword123",
+    "specialty": "Neurology",
+    "image": "http://example.com/images/jane_smith.jpg",
+    "description": "Expert neurologist specializing in brain disorders.",
+    "workExperience": 15,
+    "Lat": 34.0522,
+    "Long": -118.2437,
+    "location": {
+      "type": "Point",
+      "coordinates": [-118.2437, 34.0522]
+    },
+    "clinicName": "NeuroCare Center",
+    "numberOfPatientsViewed": 800,
+    "experience": 15,
+    "rating": 4.8,
+    "reviewCount": 200,
+    "availableDateTimeSlots": ["2024-08-09T09:00:00", "2024-08-09T13:00:00"]
+  },
+  {
+    "name": "Dr. Emily Johnson",
+    "email": "emily.johnson@example.com",
+    "password": "hashedpassword123",
+    "specialty": "Orthopedics",
+    "image": "http://example.com/images/emily_johnson.jpg",
+    "description": "Orthopedic surgeon with extensive experience in joint replacement.",
+    "workExperience": 12,
+    "Lat": 37.7749,
+    "Long": -122.4194,
+    "location": {
+      "type": "Point",
+      "coordinates": [-122.4194, 37.7749]
+    },
+    "clinicName": "OrthoCare Clinic",
+    "numberOfPatientsViewed": 650,
+    "experience": 12,
+    "rating": 4.6,
+    "reviewCount": 150,
+    "availableDateTimeSlots": ["2024-08-10T11:00:00", "2024-08-10T15:00:00"]
+  },
+  {
+    "name": "Dr. Michael Brown",
+    "email": "michael.brown@example.com",
+    "password": "hashedpassword123",
+    "specialty": "Pediatrics",
+    "image": "http://example.com/images/michael_brown.jpg",
+    "description": "Pediatrician with a passion for child health and development.",
+    "workExperience": 8,
+    "Lat": 51.5074,
+    "Long": -0.1278,
+    "location": {
+      "type": "Point",
+      "coordinates": [-0.1278, 51.5074]
+    },
+    "clinicName": "PediCare London",
+    "numberOfPatientsViewed": 400,
+    "experience": 8,
+    "rating": 4.7,
+    "reviewCount": 100,
+    "availableDateTimeSlots": ["2024-08-11T08:00:00", "2024-08-11T12:00:00"]
+  }
+]

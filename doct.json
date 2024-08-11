@@ -1,0 +1,37 @@
+{
+    "name": "Dr. John Smith",
+    "email": "john.smith@example.com",
+    "password": "hashedpassword",  
+    "specialty": "Cardiology",
+    "image": "http://example.com/images/dr-john-smith.jpg",
+    "description": "Experienced cardiologist with over 15 years of experience in treating heart diseases.",
+    "workExperience": 15,
+    "location": {
+      "type": "Point",
+      "coordinates": [-74.006, 40.7128],  
+      "address": "123 Heart Lane, New York, NY, USA"
+    },
+    "clinicName": "Healthy Heart Clinic",
+    "numberOfPatientsViewed": 1500,
+    "experience": 15,
+    "rating": 4.8,
+    "reviewCount": 250,
+    "availableDateTimeSlots": [
+      {
+        "date": "2024-08-12T00:00:00Z",
+        "slots": [
+          "09:00-10:00",
+          "10:00-11:00",
+          "11:00-12:00"
+        ]
+      },
+      {
+        "date": "2024-08-13T00:00:00Z",
+        "slots": [
+          "14:00-15:00",
+          "15:00-16:00"
+        ]
+      }
+    ]
+  }
+  
