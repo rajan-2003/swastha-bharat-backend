@@ -1,13 +1,33 @@
 const Bull = require("bull");
 const axios = require("axios");
+const IORedis = require("ioredis");
 
-// Create a new queue with Redis configuration
+// Your external Redis URL
+const redisUrl = "rediss://red-cqsh9fij1k6c73fkrbdg:5ijVm5D5EbiSSo9iJfrYFlX3Dc4Mwg1G@oregon-redis.render.com:6379";
+
+// Create a new ioredis client with adjusted options
+const redisClient = new IORedis(redisUrl, {
+  tls: {
+    rejectUnauthorized: false,
+  },
+  enableReadyCheck: false,  // Disable ready check to avoid conflicts with Bull
+  maxRetriesPerRequest: null, // Ensure no max retries per request
+});
+
+// Create a new queue with the external Redis client
 const notificationQueue = new Bull("notificationQueue", {
-  redis: {
-    host: "localhost",
-    port: 6379,
-    retryStrategy: (times) => Math.min(times * 50, 2000),
-    connectTimeout: 10000,
+  createClient: (type) => {
+    switch (type) {
+      case "client":
+        return redisClient;
+      case "subscriber":
+        return redisClient.duplicate({
+          enableReadyCheck: false,
+          maxRetriesPerRequest: null,
+        });
+      default:
+        return redisClient;
+    }
   },
 });
 
@@ -17,12 +37,11 @@ notificationQueue.on("error", (error) => {
 });
 
 // Process jobs in the queue
-//process starts when the assign delay with a particular process mets the condition
 notificationQueue.process(async (job) => {
   const { fcmToken, title, body } = job.data;
   try {
     const response = await axios.post(
-      "http://localhost:5000/user/notifications/push-notification",
+      "https://swastha-bharat-backend.onrender.com/user/notifications/push-notification",
       { fcmToken, title, body },
       { headers: { "Content-Type": "application/json" } }
     );
@@ -33,12 +52,11 @@ notificationQueue.process(async (job) => {
 });
 
 // Function to add a job
-//it adds the process in the queue aalong with the delay
 async function addNotificationJob(fcmToken, delayInMinutes, title, body) {
   try {
     if (!fcmToken || typeof fcmToken !== "string" || fcmToken.trim() === "") {
-      console.error("add notification job");
-      return res.status(400).send({ message: "Invalid FCM token" });
+      console.error("Invalid FCM token");
+      return;
     }
     const delay = delayInMinutes * 60 * 1000; // Convert minutes to milliseconds
     await notificationQueue.add({ fcmToken, title, body }, { delay: delay });
@@ -61,8 +79,6 @@ async function checkQueueStatus() {
       console.log("Queue is empty. Cleaning up jobs.");
       await notificationQueue.clean(0, "completed");
       await notificationQueue.clean(0, "failed");
-      // Optionally: Remove all jobs and metadata if you need a fresh start
-      // await notificationQueue.empty();
     } else {
       console.log(
         `Queue status: ${waitingCount} waiting, ${activeCount} active, ${delayedCount} delayed.`
@@ -73,7 +89,7 @@ async function checkQueueStatus() {
   }
 }
 
-// 10 seconds
+// 30 seconds
 const interval = 30000;
 
 setInterval(async () => {
